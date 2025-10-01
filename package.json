@@ -1,5 +1,5 @@
 {
-  "name": "ASK-XMD",
+  "name": "BOT WHATSAPP FREE",
   "version": "0.0.1",
   "description": "Automated WhatsApp MD bot created using Node.js and Baileys lib",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [
-    "KAYA-MD"
+    "DEV ASK BOT"
   ],
   "author": "DevAsk",
   "license": "NYX",
