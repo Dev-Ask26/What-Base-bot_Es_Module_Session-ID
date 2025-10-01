@@ -19,7 +19,7 @@ import {
   generateWAMessageFromContent,
   delay,
   getDevice
-} from "@rexxhayanasi/elaina-bail";
+} from "@whiskeysockets/baileys";
 
 // =================== Fonctions utilitaires ===================
 export const sizeFormatter = (bytes, decimals = 2) => {
@@ -162,7 +162,7 @@ export const smsg = (client, m, store) => {
         : null;
     if (!type) throw new Error("Unsupported media type");
     const { downloadContentFromMessage } = await import(
-      "@rexxhayanasi/elaina-bail"
+      "@whiskeysockets/baileys"
     );
     const stream = await downloadContentFromMessage(m.msg, type.replace("Message", ""));
     const chunks = [];
@@ -181,7 +181,7 @@ export const smsg = (client, m, store) => {
       }
 
       const { downloadContentFromMessage } = await import(
-        "@rexxhayanasi/elaina-bail"
+        "@whiskeysockets/baileys"
       );
       const stream = await downloadContentFromMessage(
         quoted[type],
