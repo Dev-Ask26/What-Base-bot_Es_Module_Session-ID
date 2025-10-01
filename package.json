@@ -1,5 +1,5 @@
 {
-  "name": "BOT WHATSAPP FREE",
+  "name": "ASK-XMD",
   "version": "0.0.1",
   "description": "Automated WhatsApp MD bot created using Node.js and Baileys lib",
   "main": "index.js",
@@ -8,12 +8,12 @@
     "start": "node index.js"
   },
   "keywords": [
-    "DEV ASK BOT"
+    "AQUA-XMD"
   ],
   "author": "DevAsk",
   "license": "NYX",
   "dependencies": {
-    "@rexxhayanasi/elaina-bail": "latest",
+    "@whiskeysockets/baileys": "npm:baileys-mod@latest",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@bochilteam/scraper": "4.0.22-alpha.0",
     "@google/generative-ai": "^0.24.0",
