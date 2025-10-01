@@ -1,0 +1,26 @@
+{
+  "name": "What-Base-Free",
+  "version": "0.0.1",
+  "description": "Automated WhatsApp MD bot created using Node.js and Baileys lib Create By Dev Ask For You",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Dev Ask Tech",
+  "license": "MIT",
+  "dependencies": {
+    "@rexxhayanasi/elaina-bail": "^1.0.0",
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "crypto": "^1.0.1",
+    "fs-extra": "^11.1.1",
+    "moment-timezone": "^0.5.34",
+    "pino": "^8.14.0",
+    "qrcode-terminal": "^0.12.0",
+    "jimp": "^0.16.1",
+    "wa-sticker-formatter": "^4.4.4",
+    "sharp": "^0.34.1",
+    "os": "^0.1.2"
+  }
+}
