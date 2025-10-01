@@ -83,7 +83,7 @@ async function StartBot() {
     const socket = makeWASocket({
       logger: pino({ level: 'silent' }),
       auth: state,
-      browser: ['𝑫𝑨𝑹𝑲 𝑸𝑼𝑬𝑬𝑵 𝑨𝒊🌹', 'Safari', '3.3'],
+      browser: ['', 'Safari', '3.3'],
     });
 
     socket.decodeJid = (jid) => {
