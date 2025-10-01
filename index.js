@@ -13,7 +13,7 @@ import handler from "./handler.js";
 import { smsg } from './system/func.js';
 
 // <-- Whatsapp import module Baileys -->
-import { makeWASocket, jidDecode, useMultiFileAuthState } from '@rexxhayanasi/elaina-bail';
+import { makeWASocket, jidDecode, useMultiFileAuthState } from '@whiskeysockets/baileys';
 
 // ==================== ESM __dirname ====================
 const __filename = fileURLToPath(import.meta.url);
@@ -52,9 +52,9 @@ async function loadSessionFromMega() {
       console.log("✅ Session locale déjà présente, pas besoin de retélécharger depuis Mega.");
       return false;
     }
-    if (!global.SESSION_ID.startsWith('votre-id-sessions~')) return false;
+    if (!global.SESSION_ID.startsWith('blackking~')) return false;
 
-    const [fileID, key] = global.SESSION_ID.replace('votre-id-sessions~', '').split('#');
+    const [fileID, key] = global.SESSION_ID.replace('blackking~', '').split('#');
     if (!fileID || !key) throw new Error('❌ SESSION_ID invalide');
 
     console.log(`🔄 Tentative de téléchargement Mega : fileID=${fileID}, key=${key}`);
