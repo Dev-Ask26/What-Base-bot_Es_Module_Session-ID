@@ -2,7 +2,7 @@
 
 WhatsApp Bot - Base Éducative Simple
 
-Créé par Dev Ask
+🍷Créé par Dev Ask
 
 Cette base de bot WhatsApp est pour apprentissage et utilise ES Module. Vous pouvez facilement ajouter des commandes normales ou de groupe, et apprendre à gérer le bot.
 
@@ -11,5 +11,7 @@ Cette base de bot WhatsApp est pour apprentissage et utilise ES Module. Vous pou
 TECH DEV ASK 🍹🫡 CREE EN 01/11/2025
 ---
 
-Base éducative pour apprendre à coder un bot WhatsApp en ES Module.
+Base éducative pour apprendre à coder un bot WhatsApp Avec Session Id en ES Module.
+
+oublie pas de me laisse une 🌟
 
