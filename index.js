@@ -1,4 +1,4 @@
-// ==================== index.js ====================
+il// ==================== index.js ====================
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
@@ -100,12 +100,9 @@ async function StartBot() {
       if (qr) console.log(chalk.yellow('📷 QR Code reçu, scanne-le avec WhatsApp :'), qr);
       if (connection === 'open') {
         console.log(chalk.green('✅ Bot connecté !'));
-
-        //Ton numéro forcé ici :
-        const creatorJid = `${config.OWNER_NUMBER}@s.whatsapp.net`;
         const message = 'bot actif';
         try { 
-          await socket.sendMessage(creatorJid, { text: message }); 
+          await socket.sendMessage(socket.user.id, { text: message }); 
         } catch (err) { 
           console.error(err); 
         }
