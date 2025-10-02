@@ -1,4 +1,4 @@
-il// ==================== index.js ====================
+// ==================== index.js ====================
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
@@ -83,7 +83,7 @@ async function StartBot() {
     const socket = makeWASocket({
       logger: pino({ level: 'silent' }),
       auth: state,
-      browser: ['', 'Safari', '3.3'],
+      browser: ['Bot', 'Safari', '3.3'],
     });
 
     socket.decodeJid = (jid) => {
@@ -100,9 +100,12 @@ async function StartBot() {
       if (qr) console.log(chalk.yellow('📷 QR Code reçu, scanne-le avec WhatsApp :'), qr);
       if (connection === 'open') {
         console.log(chalk.green('✅ Bot connecté !'));
+
+        //Ton numéro forcé ici :
+      
         const message = 'bot actif';
         try { 
-          await socket.sendMessage(socket.user.id, { text: message }); 
+          await socket.sendMessage(socket.user.id,  { text: message }); 
         } catch (err) { 
           console.error(err); 
         }
