@@ -2,28 +2,35 @@
 import decodeJid from './decodeJid.js';
 import config from '../config.js';
 
-/**
- * Vérifie si un utilisateur est Owner, Admin, Sudo ou BotAdmin
- * @param {object} socket - Le client Baileys
- * @param {string} chatId - ID du chat (groupe ou privé)
- * @param {string} sender - JID de l’utilisateur à vérifier
- * @param {Array} participants - Liste des participants du groupe
- * @param {object} metadata - Metadata du groupe
- */
 export default async function checkAdminOrOwner(socket, chatId, sender, participants = [], metadata = null) {
   const isGroup = chatId.endsWith('@g.us');
 
-  // Nettoyage des numéros
+  // Nettoyage robuste des numéros
+  const cleanNumber = (num) => {
+    if (!num) return '';
+    return num.toString().trim().replace(/[^\d]/g, '');
+  };
+
   const ownerNumbers = config.OWNER_NUMBER.split(',')
-    .map(o => o.trim().replace(/\D/g, ''));
-  const sudoNumbers = (config.SUDO || []).map(s => s.trim().replace(/\D/g, ''));
-  const senderNumber = decodeJid(sender).split('@')[0].replace(/\D/g, '');
+    .map(o => cleanNumber(o))
+    .filter(o => o.length > 0);
 
-  // Vérif si Owner (config)
-  const isBotOwner = ownerNumbers.includes(senderNumber);
+  const sudoNumbers = (config.SUDO || []).map(s => cleanNumber(s)).filter(s => s.length > 0);
+  
+  const senderJid = decodeJid(sender);
+  const senderNumber = cleanNumber(senderJid.split('@')[0]);
 
-  // Vérif si Sudo
-  const isSudo = sudoNumbers.includes(senderNumber);
+  console.log('🔍 Debug permissions:');
+  console.log('- Owner numbers:', ownerNumbers);
+  console.log('- Sender number:', `"${senderNumber}"`);
+  console.log('- Sender JID:', senderJid);
+
+  // Comparaison plus robuste
+  const isBotOwner = ownerNumbers.some(ownerNum => ownerNum === senderNumber);
+  const isSudo = sudoNumbers.some(sudoNum => sudoNum === senderNumber);
+
+  console.log('- isBotOwner:', isBotOwner);
+  console.log('- isSudo:', isSudo);
 
   // Si pas un groupe
   if (!isGroup) {
@@ -36,7 +43,7 @@ export default async function checkAdminOrOwner(socket, chatId, sender, particip
     };
   }
 
-  // Si groupe → récupérer metadata
+  // ... le reste du code pour les groupes
   try {
     if (!metadata) metadata = await socket.groupMetadata(chatId);
     if (!participants || participants.length === 0) participants = metadata.participants || [];
@@ -51,13 +58,11 @@ export default async function checkAdminOrOwner(socket, chatId, sender, particip
     };
   }
 
-  // Vérifie si le sender est dans la liste des participants
   const participant = participants.find(p => {
     const jidToCheck = decodeJid(p.jid || p.id || '');
-    return jidToCheck === decodeJid(sender);
+    return jidToCheck === senderJid;
   }) || null;
 
-  // Vérifie si Admin de groupe
   const isAdmin = !!participant && (
     participant.admin === 'admin' ||
     participant.admin === 'superadmin' ||
@@ -67,10 +72,7 @@ export default async function checkAdminOrOwner(socket, chatId, sender, particip
     participant.isSuperAdmin === true
   );
 
-  // Vérifie si Owner du groupe
-  const isGroupOwner = metadata.owner && decodeJid(metadata.owner) === decodeJid(sender);
-
-  // Final
+  const isGroupOwner = metadata.owner && decodeJid(metadata.owner) === senderJid;
   const isOwnerUser = isBotOwner || isGroupOwner;
 
   return {
